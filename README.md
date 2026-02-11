@@ -7,6 +7,7 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 
 ### 1. Manajemen Transaksi
 - Tambah transaksi **Income** dan **Expense**
+![Uploading Screenshot 2026-02-11 at 22.49.20.png…]()
 - Edit transaksi yang sudah dibuat
 - Hapus transaksi dengan **konfirmasi**
 - **Multiple delete** (pilih banyak transaksi sekaligus)
