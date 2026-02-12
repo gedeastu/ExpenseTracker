@@ -14,6 +14,8 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 - **Hold to delete**
 - **Undo Delete** (single & multiple)
 
+---
+
 ### 2. Summary & Analisis Keuangan
 - Ringkasan:
   - Total Income
