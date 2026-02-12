@@ -7,12 +7,11 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 
 ### 1. Manajemen Transaksi
 - Tambah transaksi **Income** dan **Expense**
-  <br/>
-  <img src="https://github.com/gedeastu/ExpenseTracker/blob/73e89e9a995ffdce417cfa6b82bebced747d1679/Screenshot%202026-02-11%20at%2022.49.20.png" width="50%" />
-  <br/>
 - Edit transaksi yang sudah dibuat
 - Hapus transaksi dengan **konfirmasi**
-- **Multiple delete** (pilih banyak transaksi sekaligus)
+- **Multiple delete**
+- **Swipe to delete**
+- **Hold to delete**
 - **Undo Delete** (single & multiple)
 
 ### 2. Summary & Analisis Keuangan
@@ -40,8 +39,3 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 ### 4. Dark Mode Support
 - Mengikuti sistem (Light / Dark Mode)
 - Warna adaptif
-- Kontras tetap terjaga pada semua komponen:
-  - Summary
-  - Filter
-  - Form
-  - Chart
