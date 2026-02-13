@@ -62,8 +62,9 @@ https://github.com/gedeastu/ExpenseTracker.git
 ### 2. Input URL Repository pada XCode
 <img src="https://github.com/gedeastu/ExpenseTracker/blob/7dd8a396d91190128b89a78c76c40060d2399943/Screenshot%202026-02-13%20at%2021.17.42.png" width="250"/>
 <br>
-<img src="" width="250"/>
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/b100c8ca2360c8639f2255257161e82039f29ebc/Screenshot%202026-02-13%20at%2021.18.09.png" width="250"/>
 
 ### 3. Pastikan target iOS 16+
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/b100c8ca2360c8639f2255257161e82039f29ebc/Screenshot%202026-02-13%20at%2021.18.09.png" width="250"/>
 
 ### 4. Build & Run di simulator atau device
