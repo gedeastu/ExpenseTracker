@@ -46,13 +46,15 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 
 ### 1. Transactions
 <img src="https://github.com/gedeastu/ExpenseTracker/blob/6eefa942a32d229682ec35a6b4adaf7dd84093b5/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202026-02-13%20at%2001.48.40.png" width="250"/>
+<br>
 ---
 ### 2. Summary
 <img src="https://github.com/gedeastu/ExpenseTracker/blob/003d09e713687cd80d26a41124b5b94629a1d9de/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202026-02-13%20at%2001.48.26.png" width="250"/>
 <br>
 ---
 ### 3. Form Transaction
-
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/53de750b6f826542c44051261199e1039871a008/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202026-02-13%20at%2001.48.34.png" width="250"/>
+<br>
 ---
 
 ## ⚙️ Cara menjalankan aplikasi
