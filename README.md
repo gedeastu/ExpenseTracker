@@ -58,6 +58,7 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 ### 1. Clone Repository
 ```bash
 https://github.com/gedeastu/ExpenseTracker.git
+```
 
 ### 2. Input URL Repository pada XCode
 <img src="https://github.com/gedeastu/ExpenseTracker/blob/7dd8a396d91190128b89a78c76c40060d2399943/Screenshot%202026-02-13%20at%2021.17.42.png" width="250"/>
@@ -68,3 +69,5 @@ https://github.com/gedeastu/ExpenseTracker.git
 <img src="https://github.com/gedeastu/ExpenseTracker/blob/2819bd2a94c800b1302baa2718026a45a693aa3f/Screenshot%202026-02-13%20at%2021.23.21.png" width="250"/>
 
 ### 4. Build & Run di simulator atau device
+- Pilih simulator (contoh: iPhone 16 Pro)
+- Tekan Cmd + R
