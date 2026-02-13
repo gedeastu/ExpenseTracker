@@ -48,7 +48,7 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 
 ---
 ### 2. Summary
-
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/003d09e713687cd80d26a41124b5b94629a1d9de/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202026-02-13%20at%2001.48.26.png" width="250"/>
 ---
 ### 3. Form Transaction
 
