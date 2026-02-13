@@ -41,3 +41,19 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 ### 4. Dark Mode Support
 - Mengikuti sistem (Light / Dark Mode)
 - Warna adaptif
+
+## 📸 Screenshoots Aplikasi
+
+### 1. Transactions
+
+---
+### 2. Summary
+
+---
+### 3. Form Transaction
+
+---
+
+## ⚙️ Cara menjalankan aplikasi
+
+### 
