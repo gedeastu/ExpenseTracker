@@ -57,4 +57,10 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 
 ### 1. Clone Repository
 ```bash
-cd ExpenseTracker
+https://github.com/gedeastu/ExpenseTracker.git
+
+### 2. Input URL Repository pada XCode
+
+### 3. Pastikan target iOS 16+
+
+### 4. Build & Run di simulator atau device
