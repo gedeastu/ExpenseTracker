@@ -60,6 +60,9 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 https://github.com/gedeastu/ExpenseTracker.git
 
 ### 2. Input URL Repository pada XCode
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/7dd8a396d91190128b89a78c76c40060d2399943/Screenshot%202026-02-13%20at%2021.17.42.png" width="250"/>
+<br>
+<img src="" width="250"/>
 
 ### 3. Pastikan target iOS 16+
 
