@@ -55,4 +55,6 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 
 ## ⚙️ Cara menjalankan aplikasi
 
-### 
+### 1. Clone Repository
+```bash
+cd ExpenseTracker
