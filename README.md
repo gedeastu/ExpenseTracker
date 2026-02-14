@@ -7,12 +7,14 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 
 ### 1. Manajemen Transaksi
 - Tambah transaksi **Income** dan **Expense**
-  
-![Uploading Screenshot 2026-02-11 at 22.49.20.png…]()
 - Edit transaksi yang sudah dibuat
 - Hapus transaksi dengan **konfirmasi**
-- **Multiple delete** (pilih banyak transaksi sekaligus)
+- **Multiple delete**
+- **Swipe to delete**
+- **Hold to delete**
 - **Undo Delete** (single & multiple)
+
+---
 
 ### 2. Summary & Analisis Keuangan
 - Ringkasan:
@@ -39,8 +41,33 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 ### 4. Dark Mode Support
 - Mengikuti sistem (Light / Dark Mode)
 - Warna adaptif
-- Kontras tetap terjaga pada semua komponen:
-  - Summary
-  - Filter
-  - Form
-  - Chart
+
+## 📸 Screenshoots Aplikasi
+
+### 1. Transactions
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/6eefa942a32d229682ec35a6b4adaf7dd84093b5/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202026-02-13%20at%2001.48.40.png" width="250"/>
+
+### 2. Summary
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/003d09e713687cd80d26a41124b5b94629a1d9de/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202026-02-13%20at%2001.48.26.png" width="250"/>
+
+### 3. Form Transaction
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/53de750b6f826542c44051261199e1039871a008/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202026-02-13%20at%2001.48.34.png" width="250"/>
+
+## ⚙️ Cara menjalankan aplikasi
+
+### 1. Clone Repository
+```bash
+https://github.com/gedeastu/ExpenseTracker.git
+```
+
+### 2. Input URL Repository pada XCode
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/7dd8a396d91190128b89a78c76c40060d2399943/Screenshot%202026-02-13%20at%2021.17.42.png" width="250"/>
+<br>
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/b100c8ca2360c8639f2255257161e82039f29ebc/Screenshot%202026-02-13%20at%2021.18.09.png" width="250"/>
+
+### 3. Pastikan target iOS 16+
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/2819bd2a94c800b1302baa2718026a45a693aa3f/Screenshot%202026-02-13%20at%2021.23.21.png" width="250"/>
+
+### 4. Build & Run di simulator atau device
+- Pilih simulator (contoh: iPhone 16 Pro)
+- Tekan Cmd + R
