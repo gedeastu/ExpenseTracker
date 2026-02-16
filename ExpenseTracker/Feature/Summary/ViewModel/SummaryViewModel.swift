@@ -1,15 +1,22 @@
 import Foundation
 import CoreData
 import Combine
+import SwiftUI
 
 final class SummaryViewModel: ObservableObject {
 
     // MARK: - Filters
     @Published var selectedRange: SummaryRange = .allTime
-    /// Menyimpan category rawValue (lowercased)
     @Published var selectedCategories: Set<String> = []
 
-    // MARK: - Output
+    // Persist selected currency
+    @AppStorage("selectedCurrency") var selectedCurrency: String = "IDR" {
+        didSet {
+            applyCurrencyConversion()
+        }
+    }
+
+    // MARK: - Output (Base Currency = IDR)
     @Published private(set) var metrics = SummaryMetrics(
         totalIncome: 0,
         totalExpense: 0,
@@ -18,19 +25,38 @@ final class SummaryViewModel: ObservableObject {
 
     @Published private(set) var chartData: [SummaryChartEntry] = []
 
-    // MARK: - Dependencies
+    // MARK: - Converted Values
+    @Published private(set) var convertedIncome: Double = 0
+    @Published private(set) var convertedExpense: Double = 0
+    @Published private(set) var convertedBalance: Double = 0
+
+    // MARK: - Currency
+    @Published private(set) var rates: [String: Double] = [:]
+    @Published var isLoadingRate = false
+
+    // MARK: - Private
     private let context: NSManagedObjectContext
+    private let currencyService: CurrencyServiceProtocol
     private var cancellables = Set<AnyCancellable>()
+    private var lastFilteredTransactions: [TransactionEntity] = []
 
     // MARK: - Init
-    init(context: NSManagedObjectContext) {
+    init(
+        context: NSManagedObjectContext,
+        currencyService: CurrencyServiceProtocol = CurrencyService()
+    ) {
         self.context = context
-        bindCoreDataChanges()
+        self.currencyService = currencyService
+
         bindFilters()
+        bindCoreDataChanges()
+
         reloadSummary()
+        fetchExchangeRates()
     }
 
     // MARK: - Bindings
+
     private func bindFilters() {
         Publishers.CombineLatest($selectedRange, $selectedCategories)
             .debounce(for: .milliseconds(150), scheduler: RunLoop.main)
@@ -51,6 +77,7 @@ final class SummaryViewModel: ObservableObject {
     }
 
     // MARK: - Category Helpers
+
     var expenseCategories: [CategoryFilterItem] {
         ExpenseCategory.allCases.map { $0.filterItem }
     }
@@ -59,7 +86,6 @@ final class SummaryViewModel: ObservableObject {
         IncomeCategory.allCases.map { $0.filterItem }
     }
 
-    /// Toggle category. Jika semua di-unselect → fallback ke ALL (no filter)
     func toggleCategory(_ category: String) {
         let key = category.lowercased()
         if selectedCategories.contains(key) {
@@ -69,24 +95,61 @@ final class SummaryViewModel: ObservableObject {
         }
     }
 
-    /// Explicit reset ke ALL
     func resetCategory() {
         selectedCategories.removeAll()
     }
 
-    // MARK: - Core Reload
+    // MARK: - Currency
+
+    func fetchExchangeRates() {
+        isLoadingRate = true
+
+        currencyService.fetchRates(base: "IDR") { [weak self] result in
+            guard let self else { return }
+
+            DispatchQueue.main.async {
+                self.isLoadingRate = false
+
+                switch result {
+                case .success(let fetchedRates):
+                    self.rates = fetchedRates
+                case .failure:
+                    self.rates = [:]
+                }
+
+                self.applyCurrencyConversion()
+                self.rebuildChartData()
+            }
+        }
+    }
+
+    private func applyCurrencyConversion() {
+
+        guard selectedCurrency != "IDR",
+              let rate = rates[selectedCurrency] else {
+            convertedIncome = metrics.totalIncome
+            convertedExpense = metrics.totalExpense
+            convertedBalance = metrics.balance
+            return
+        }
+
+        convertedIncome = metrics.totalIncome * rate
+        convertedExpense = metrics.totalExpense * rate
+        convertedBalance = metrics.balance * rate
+    }
+
+    // MARK: - Reload Summary
+
     private func reloadSummary() {
         let transactions = fetchTransactions()
 
         let filtered = transactions.filter { tx in
-            // 1) Date filter
-            guard let date = tx.date, selectedRange.contains(date) else {
+            guard let date = tx.date,
+                  selectedRange.contains(date) else {
                 return false
             }
 
-            // 2) Category filter
-            // Jika tidak ada category dipilih → TAMPILKAN SEMUA (ALL)
-            guard !selectedCategories.isEmpty else {
+            if selectedCategories.isEmpty {
                 return true
             }
 
@@ -94,27 +157,41 @@ final class SummaryViewModel: ObservableObject {
             return selectedCategories.contains(txCategory)
         }
 
+        lastFilteredTransactions = filtered
+
         metrics = calculateSummaryMetrics(from: filtered)
-        buildChartData(from: filtered)
+        rebuildChartData()
+        applyCurrencyConversion()
     }
 
-    // MARK: - Chart Builder
-    private func buildChartData(from transactions: [TransactionEntity]) {
-        guard !transactions.isEmpty else {
+    // MARK: - Chart
+
+    private func rebuildChartData() {
+        guard !lastFilteredTransactions.isEmpty else {
             chartData = []
             return
         }
 
-        let grouped = Dictionary(grouping: transactions) { tx in
+        let grouped = Dictionary(grouping: lastFilteredTransactions) { tx in
             chartLabel(for: tx.date ?? Date())
         }
 
         chartData = grouped
             .map { key, values in
-                SummaryChartEntry(
+                let baseTotal = values.reduce(0) { $0 + $1.amount }
+
+                let finalTotal: Double
+                if selectedCurrency == "IDR" {
+                    finalTotal = baseTotal
+                } else {
+                    let rate = rates[selectedCurrency] ?? 0
+                    finalTotal = baseTotal * rate
+                }
+
+                return SummaryChartEntry(
                     id: key,
                     label: key,
-                    total: values.reduce(0) { $0 + $1.amount }
+                    total: finalTotal
                 )
             }
             .sorted { $0.label < $1.label }
@@ -142,8 +219,11 @@ final class SummaryViewModel: ObservableObject {
     }
 
     // MARK: - Fetch
+
     private func fetchTransactions() -> [TransactionEntity] {
-        let request: NSFetchRequest<TransactionEntity> = TransactionEntity.fetchRequest()
+        let request: NSFetchRequest<TransactionEntity> =
+            TransactionEntity.fetchRequest()
+
         request.predicate = NSPredicate(format: "is_deleted == NO")
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \TransactionEntity.date, ascending: true)
@@ -157,4 +237,3 @@ final class SummaryViewModel: ObservableObject {
         }
     }
 }
-

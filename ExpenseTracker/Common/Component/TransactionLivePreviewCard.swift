@@ -15,7 +15,8 @@ struct TransactionPreviewCard: View {
     let category: String
     let date: Date
     let onEdit: () -> Void
-
+    @AppStorage("selectedCurrency") private var selectedCurrency: String = "IDR"
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
 
@@ -71,7 +72,7 @@ struct TransactionPreviewCard: View {
     private var displayAmount: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencySymbol = "Rp "
+        formatter.currencySymbol = selectedCurrency
         formatter.maximumFractionDigits = 0
         formatter.groupingSeparator = "."
         formatter.decimalSeparator = ","

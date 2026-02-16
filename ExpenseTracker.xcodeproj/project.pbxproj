@@ -51,6 +51,9 @@
 				Feature/Expense/ViewModel/TransactionsViewModel.swift,
 				Feature/Summary/View/SummaryView.swift,
 				Feature/Summary/ViewModel/SummaryViewModel.swift,
+				Network/API/CurrencyAPI.swift,
+				Network/Model/CurrencyResponse.swift,
+				Network/Service/CurrencyService.swift,
 			);
 			target = 4F39B7F82F236A990095407C /* ExpenseTrackerTests */;
 		};
@@ -71,6 +74,9 @@
 				Feature/Expense/ViewModel/TransactionsViewModel.swift,
 				Feature/Summary/View/SummaryView.swift,
 				Feature/Summary/ViewModel/SummaryViewModel.swift,
+				Network/API/CurrencyAPI.swift,
+				Network/Model/CurrencyResponse.swift,
+				Network/Service/CurrencyService.swift,
 			);
 			target = 4F39B8022F236A990095407C /* ExpenseTrackerUITests */;
 		};
