@@ -27,6 +27,7 @@ struct AddExpenseView: View {
     @State private var showAmountError = false
 
     @Binding var selectedTab: AppTab
+    @EnvironmentObject var summaryVM: SummaryViewModel
 
     // MARK: - Init
     init(
@@ -47,7 +48,7 @@ struct AddExpenseView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
 
-                // 🔹 Live Preview
+                // MARK: Live Preview
                 Text(existingItem == nil ? "Live Preview" : "Live Preview (Edit)")
                     .font(.caption)
                     .fontWeight(.bold)
@@ -59,7 +60,8 @@ struct AddExpenseView: View {
                     type: selectedType,
                     category: selectedCategory,
                     date: date,
-                    onEdit: {}
+                    onEdit: {},
+                    showCurrencySymbol: false
                 )
 
                 // MARK: - Title
@@ -212,7 +214,7 @@ extension AddExpenseView {
             showAmountError = true
             return
         }
-
+        
         if let item = existingItem {
             tvm.updateTransaction(
                 transaction: item,

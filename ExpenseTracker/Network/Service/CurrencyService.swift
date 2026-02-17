@@ -29,7 +29,6 @@ final class CurrencyService: CurrencyServiceProtocol {
 
         URLSession.shared.dataTask(with: request) { data, response, error in
 
-            // Network Error
             if let error {
                 DispatchQueue.main.async {
                     completion(.failure(error))
@@ -37,7 +36,6 @@ final class CurrencyService: CurrencyServiceProtocol {
                 return
             }
 
-            // HTTP Validation
             if let httpResponse = response as? HTTPURLResponse,
                !(200...299).contains(httpResponse.statusCode) {
                 DispatchQueue.main.async {
@@ -46,7 +44,6 @@ final class CurrencyService: CurrencyServiceProtocol {
                 return
             }
 
-            // Data Validation
             guard let data else {
                 DispatchQueue.main.async {
                     completion(.failure(URLError(.badServerResponse)))

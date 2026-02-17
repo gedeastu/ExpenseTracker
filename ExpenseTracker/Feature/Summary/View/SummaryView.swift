@@ -37,7 +37,7 @@ struct SummaryView: View {
                             )
                             SummaryKPICard(
                                 title: "Expense",
-                                value: vm.metrics.totalExpense,
+                                value: vm.convertedExpense,
                                 currencyCode: vm.selectedCurrency,
                                 color: .red
                             )
@@ -45,9 +45,9 @@ struct SummaryView: View {
 
                         SummaryKPICard(
                             title: "Balance",
-                            value: vm.metrics.balance,
+                            value: vm.convertedBalance,
                             currencyCode: vm.selectedCurrency,
-                            color: vm.metrics.balance >= 0 ? .green : .red
+                            color: vm.convertedBalance >= 0 ? .green : .red
                         )
                     }
 
@@ -69,18 +69,25 @@ struct SummaryView: View {
                 .padding()
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack{
+                        HStack(spacing: 6) {
                             Image(systemName: "dollarsign.circle")
                                 .foregroundColor(.green)
 
                             Picker("", selection: $vm.selectedCurrency) {
-                                Text("IDR").tag("IDR")
+
+                                Text("🇮🇩 IDR").tag("IDR")
+
                                 ForEach(vm.rates.keys.sorted(), id: \.self) { code in
-                                    Text(code).tag(code)
+                                    Text("\(flagEmoji(for: code)) \(code)")
+                                        .tag(code)
                                 }
                             }
                             .pickerStyle(.menu)
-                        }.padding(.leading,10)
+                            .labelsHidden()
+                            .frame(width: 90)
+                        }
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
                         .background(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.gray.opacity(0.6), lineWidth: 1)
@@ -90,4 +97,38 @@ struct SummaryView: View {
             }
         }
     }
+
+    // MARK: - Dynamic Flag Generator
+
+    private func flagEmoji(for currency: String) -> String {
+        let region = Locale.current.localizedString(forCurrencyCode: currency)?
+            .split(separator: " ")
+            .last?
+            .uppercased() ?? currency
+
+        return emojiFlag(for: regionCode(from: currency))
+    }
+
+    private func regionCode(from currency: String) -> String {
+        if let locale = Locale.availableIdentifiers
+            .compactMap({ Locale(identifier: $0) })
+            .first(where: { $0.currency?.identifier == currency }),
+           let region = locale.region?.identifier {
+            return region
+        }
+
+        return String(currency.prefix(2)).uppercased()
+    }
+
+    private func emojiFlag(for regionCode: String) -> String {
+        let base: UInt32 = 127397
+        var scalarString = ""
+        for scalar in regionCode.uppercased().unicodeScalars {
+            if let flagScalar = UnicodeScalar(base + scalar.value) {
+                scalarString.unicodeScalars.append(flagScalar)
+            }
+        }
+        return scalarString.isEmpty ? "🏳️" : scalarString
+    }
+
 }

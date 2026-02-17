@@ -15,6 +15,7 @@ struct TransactionPreviewCard: View {
     let category: String
     let date: Date
     let onEdit: () -> Void
+    let showCurrencySymbol: Bool
     @AppStorage("selectedCurrency") private var selectedCurrency: String = "IDR"
     
     var body: some View {
@@ -38,15 +39,17 @@ struct TransactionPreviewCard: View {
                 Spacer(minLength: 1)
 
                 VStack(alignment: .trailing, spacing: 4) {
-                    Text(displayAmount)
-                        .font(.headline)
-                        .foregroundStyle(type == .expense ? .red : .green)
+                    HStack(spacing: 4) {
+                        Text(displayAmount)
+                    }
+                    .font(.headline)
+                    .foregroundStyle(type == .expense ? .red : .green)
                     Spacer(minLength: 1)
                     Button {
                         onEdit()
                     } label: {
                         Image(systemName: "pencil").fontWeight(.bold)
-                            .font(.system(size: 24)) // any size you want
+                            .font(.system(size: 24)) 
                             .foregroundStyle(.green)
                     }
                     .buttonStyle(.borderless)
@@ -72,12 +75,12 @@ struct TransactionPreviewCard: View {
     private var displayAmount: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencySymbol = selectedCurrency
+        formatter.currencyCode = "Rp"
         formatter.maximumFractionDigits = 0
         formatter.groupingSeparator = "."
         formatter.decimalSeparator = ","
 
-        return formatter.string(from: NSNumber(value: amount)) ?? "Rp 0"
+        return formatter.string(from: NSNumber(value: amount)) ?? "0"
     }
 
     private var displayCategory: String {

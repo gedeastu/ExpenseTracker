@@ -57,7 +57,8 @@ struct TransactionsView: View {
                                 editMode?.wrappedValue = .inactive
                                 selection.removeAll()
                                 onEdit(transaction)
-                            }}
+                            }},
+                            showCurrencySymbol: true
                         )
                         .tag(transaction.objectID)
 

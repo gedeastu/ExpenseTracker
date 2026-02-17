@@ -32,7 +32,6 @@ extension SummaryRange {
 // MARK: - Date Logic (FINAL)
 extension SummaryRange {
 
-    /// Inclusive calendar-based check (FULL DAY safe)
     func contains(_ date: Date, reference: Date = Date()) -> Bool {
         let calendar = Calendar.current
 

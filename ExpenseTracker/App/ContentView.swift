@@ -6,6 +6,7 @@ struct ContentView: View {
     // MARK: - Environment
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject private var tvm: TransactionViewModel
+    @StateObject private var summaryVM: SummaryViewModel
     @AppStorage("appAppearance") private var appAppearance: String = "system"
 
     // MARK: - Fetch (ONLY ACTIVE DATA)
@@ -21,7 +22,6 @@ struct ContentView: View {
     // MARK: - Navigation & State
     @State private var formMode: FormMode?
 
-    // Undo
     @State private var pendingDelete: [TransactionEntity] = []
     @State private var showDeleteConfirm = false
     @State private var recentlyDeleted: [TransactionEntity]? = nil
@@ -55,15 +55,17 @@ struct ContentView: View {
         _tvm = StateObject(
             wrappedValue: TransactionViewModel(repository: repo)
         )
+        _summaryVM = StateObject(wrappedValue: SummaryViewModel(context: context))
     }
 
     // MARK: - Body
     var body: some View {
         NavigationView {
             TabView(selection: $selectedTab) {
-                // SUMMARY
+                // MARK: SUMMARY
                 NavigationStack{
                     SummaryView(context: viewContext)
+                        .environmentObject(summaryVM)
                         .foregroundColor(.green)
                         .navigationTitle("Summary")
                         .navigationBarTitleDisplayMode(.large)
@@ -90,7 +92,7 @@ struct ContentView: View {
                 .tag(AppTab.summary)
 
                 NavigationStack{
-                    // TRANSACTIONS
+                    //MARK: TRANSACTIONS
                     TransactionsView(
                         transactions: Array(expenses),
                         onEdit: { transaction in
@@ -136,6 +138,7 @@ struct ContentView: View {
                                 existingItem: nil,
                                 selectedTab: $selectedTab
                             )
+                            .environmentObject(summaryVM)
 
                         case .edit(let transaction):
                             AddExpenseView(
@@ -143,6 +146,7 @@ struct ContentView: View {
                                 existingItem: transaction,
                                 selectedTab: $selectedTab
                             )
+                            .environmentObject(summaryVM)
                         }
                     }
                     .toolbar {
@@ -160,7 +164,7 @@ struct ContentView: View {
             }
 
 
-            // DELETE CONFIRMATION
+            // MARK: DELETE CONFIRMATION
             .alert("Hapus Transaksi?",
                    isPresented: $showDeleteConfirm
             ) {
@@ -183,7 +187,7 @@ struct ContentView: View {
             appAppearance == "dark" ? .dark : nil
         )
 
-        // UNDO TOAST
+        // MARK: UNDO TOAST
         .overlay(alignment: .bottom) {
             if showUndo, let deleted = recentlyDeleted {
                 UndoToast(

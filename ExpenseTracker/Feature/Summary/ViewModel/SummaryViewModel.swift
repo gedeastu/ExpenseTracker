@@ -9,10 +9,11 @@ final class SummaryViewModel: ObservableObject {
     @Published var selectedRange: SummaryRange = .allTime
     @Published var selectedCategories: Set<String> = []
 
-    // Persist selected currency
-    @AppStorage("selectedCurrency") var selectedCurrency: String = "IDR" {
+    // MARK: Persist selected currency
+    @Published var selectedCurrency: String = "IDR" {
         didSet {
             applyCurrencyConversion()
+            rebuildChartData()
         }
     }
 
@@ -48,6 +49,7 @@ final class SummaryViewModel: ObservableObject {
         self.context = context
         self.currencyService = currencyService
 
+        
         bindFilters()
         bindCoreDataChanges()
 
@@ -136,6 +138,10 @@ final class SummaryViewModel: ObservableObject {
         convertedIncome = metrics.totalIncome * rate
         convertedExpense = metrics.totalExpense * rate
         convertedBalance = metrics.balance * rate
+        
+        print("Selected currency:", selectedCurrency)
+        print("Rate:", rates[selectedCurrency] ?? -1)
+        print("Metrics balance:", metrics.balance)
     }
 
     // MARK: - Reload Summary
