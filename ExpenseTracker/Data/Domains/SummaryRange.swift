@@ -13,7 +13,7 @@ enum SummaryRange: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
-// MARK: - UI
+// MARK: - Range Time Filter
 extension SummaryRange {
     var title: String {
         switch self {
@@ -29,7 +29,7 @@ extension SummaryRange {
     }
 }
 
-// MARK: - Date Logic (FINAL)
+// MARK: - Date Logic
 extension SummaryRange {
 
     func contains(_ date: Date, reference: Date = Date()) -> Bool {
