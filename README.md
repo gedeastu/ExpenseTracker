@@ -9,10 +9,10 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 - Tambah transaksi **Income** dan **Expense**
 - Edit transaksi yang sudah dibuat
 - Hapus transaksi dengan **konfirmasi**
-- **Multiple delete**
-- **Swipe to delete**
-- **Hold to delete**
-- **Undo Delete** (single & multiple)
+- Multiple delete
+- Swipe to delete
+- Hold to delete
+- Undo Delete (single & multiple)
 
 ---
 
