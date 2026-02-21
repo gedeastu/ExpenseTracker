@@ -35,7 +35,6 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 ### 3. Offline First
 - Semua data disimpan secara lokal menggunakan **Core Data**
 - Aplikasi tetap berjalan **tanpa koneksi internet**
-- Struktur siap dikembangkan untuk sinkronisasi online di masa depan
 
 ---
 
