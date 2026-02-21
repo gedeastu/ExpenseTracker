@@ -27,7 +27,7 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
   - Rentang waktu (Hari ini, 7 hari, 30 hari, Bulan lalu, Semua)
   - Kategori Income
   - Kategori Expense
-  - Kategori Currency
+  - Kategori Currency ( Berbasis API )
 - Mendukung kombinasi filter (date + category)
 
 ---
