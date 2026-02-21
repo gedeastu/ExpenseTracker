@@ -9,10 +9,10 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 - Tambah transaksi **Income** dan **Expense**
 - Edit transaksi yang sudah dibuat
 - Hapus transaksi dengan **konfirmasi**
-- **Multiple delete**
-- **Swipe to delete**
-- **Hold to delete**
-- **Undo Delete** (single & multiple)
+- Multiple delete
+- Swipe to delete
+- Hold to delete
+- Undo Delete (single & multiple)
 
 ---
 
@@ -27,6 +27,7 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
   - Rentang waktu (Hari ini, 7 hari, 30 hari, Bulan lalu, Semua)
   - Kategori Income
   - Kategori Expense
+  - Kategori Currency
 - Mendukung kombinasi filter (date + category)
 
 ---
@@ -48,7 +49,7 @@ Aplikasi ini dirancang untuk membantu pengguna memahami kondisi keuangan mereka 
 <img src="https://github.com/gedeastu/ExpenseTracker/blob/6eefa942a32d229682ec35a6b4adaf7dd84093b5/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202026-02-13%20at%2001.48.40.png" width="250"/>
 
 ### 2. Summary
-<img src="https://github.com/gedeastu/ExpenseTracker/blob/003d09e713687cd80d26a41124b5b94629a1d9de/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202026-02-13%20at%2001.48.26.png" width="250"/>
+<img src="https://github.com/gedeastu/ExpenseTracker/blob/4aee66fa089e98a17c1a2e2bb6e088bbdae0cb2c/simulator_screenshot_2E16D5A3-C697-4095-BCAE-C420866AAFCC.png" width="250"/>
 
 ### 3. Form Transaction
 <img src="https://github.com/gedeastu/ExpenseTracker/blob/53de750b6f826542c44051261199e1039871a008/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202026-02-13%20at%2001.48.34.png" width="250"/>
